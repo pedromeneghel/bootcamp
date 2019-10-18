@@ -2,10 +2,26 @@ import User from '../models/User';
 
 class UserController {
   async store(req, res) {
-    const user = await User.create(req.body)
+    const userExistis = await User.findOne({
+      where: { email: req.body.email },
+    });
 
-    return res.json()
+    if (userExistis) {
+      return res.status(400).json({ erro: 'User already exists.' });
+    }
+    const { id, name, email, provider } = await User.create(req.body);
+
+    return res.json({
+      id,
+      name,
+      email,
+      provider,
+    });
+  }
+
+  async update(req, res) {
+    return res.json({ ok: true });
   }
 }
 
-export default new User();
+export default new UserController();
