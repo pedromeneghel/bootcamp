@@ -7,7 +7,7 @@ import User from '../app/models/User';
 import databaseConfig from '../config/database';
 
 // Criando um array como os models
-const models = [User]
+const models = [User];
 
 class Database {
   constructor() {
@@ -18,7 +18,7 @@ class Database {
     this.connection = new Sequelize(databaseConfig);
 
     // Percorrendo o array de models e adicionando a conexão
-    models.map( model => model.init(this.connection));
+    models.map(model => model.init(this.connection));
   }
 }
 
