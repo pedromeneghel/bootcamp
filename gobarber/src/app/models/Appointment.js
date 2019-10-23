@@ -1,12 +1,12 @@
 import Sequelize, { Model } from 'sequelize';
 
-class File extends Model {
+class Appointment extends Model {
   static init(sequelize) {
     // Super é classe exstendida (model) e init é um método da classe Model
     super.init(
       {
-        name: Sequelize.STRING,
-        path: Sequelize.STRING,
+        date: Sequelize.DATE,
+        canceled_at: Sequelize.DATE,
         url: {
           type: Sequelize.VIRTUAL,
           get() {
@@ -20,6 +20,11 @@ class File extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'provider' });
+  }
 }
 
-export default File;
+export default Appointment;
