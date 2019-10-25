@@ -1,7 +1,22 @@
+import * as Yup from 'yup';
 import User from '../models/User';
 
 class UserController {
   async store(req, res) {
+    const schema = Yup.object().shape({
+      email: Yup.string().required(),
+      name: Yup.string()
+        .min(3)
+        .required(),
+      password: Yup.string()
+        .min(6)
+        .required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validate fails.' });
+    }
+
     const userExistis = await User.findOne({
       where: { email: req.body.email },
     });

@@ -5,6 +5,8 @@ import UserController from './app/controllers/UserController';
 import ProviderController from './app/controllers/ProviderController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
+import ScheduleController from './app/controllers/ScheduleController';
+
 import multerConfig from './config/multer';
 
 import authMiddleware from './app/middlewares/auth';
@@ -24,5 +26,7 @@ routes.get('/providers', ProviderController.index);
 
 routes.get('/appointments', AppointmentController.index);
 routes.post('/appointments', AppointmentController.store);
+
+routes.get('/schedules', ScheduleController.index);
 
 export default routes;
