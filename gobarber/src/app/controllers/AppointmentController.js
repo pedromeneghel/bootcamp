@@ -7,6 +7,15 @@ import File from '../models/File';
 class AppointmentController {
   async index(req, res) {
     const { page = 1 } = req.query;
+
+    const schema = Yup.object().shape({
+      page: Yup.number(),
+    });
+
+    if (!(await schema.isValid(req.query))) {
+      return res.status('400').json({ error: 'Page number incorrect.' });
+    }
+
     const appointments = await Appointment.findAll({
       where: { user_id: req.userId, canceled_at: null },
       order: ['date'],
