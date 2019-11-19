@@ -20,12 +20,12 @@ import {
 } from './styles';
 
 export default class Main extends Component {
+  static navigationOptions = {
+    title: 'Adicionar Usuário',
+  };
+
   constructor() {
     super();
-
-    this.navigationOptions = {
-      title: 'Adicionar Usuário',
-    };
 
     this.PropTypes = {
       navigation: propTypes.shape({
