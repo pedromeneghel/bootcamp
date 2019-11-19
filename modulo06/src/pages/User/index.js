@@ -7,12 +7,12 @@ import api from '../../services/api';
 // import { Container } from './styles';
 
 export default class User extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam('user').name,
+  });
+
   constructor() {
     super();
-
-    this.navigationOptions = ({ navigation }) => ({
-      title: navigation.getParam('user').name,
-    });
 
     this.PropTypes = {
       navigation: propTypes.shape({
